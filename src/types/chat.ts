@@ -4,4 +4,5 @@ export interface ChatMessage {
   content: string;
   sender: 'user' | 'bot';
   timestamp: string;
+  category?: 'destination' | 'activity' | 'dining' | 'exploration' | 'general';
 }

@@ -13,9 +13,10 @@ const ConciergeChat: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      content: "Welcome to Luxe Voyage Whisperer. I'm your personal AI luxury travel concierge. How can I assist with your travel plans today?",
+      content: "Welcome to Luxe Voyage Whisperer. I'm your personal AI luxury travel concierge. I can assist with destination recommendations, activities, dining experiences, and hidden gems to explore. How may I help with your travel plans today?",
       sender: 'bot',
-      timestamp: formatDistanceToNow(new Date(), { addSuffix: true })
+      timestamp: formatDistanceToNow(new Date(), { addSuffix: true }),
+      category: 'general'
     }
   ]);
   const [inputMessage, setInputMessage] = useState('');
@@ -77,7 +78,7 @@ const ConciergeChat: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-serif text-luxury-navy mb-3">Your Personal Travel Concierge</h2>
           <div className="h-1 w-24 gold-accent mx-auto rounded-full mb-4"></div>
           <p className="text-luxury-charcoal/80 max-w-2xl mx-auto">
-            Ask our AI luxury travel concierge for personalized recommendations and travel assistance.
+            Ask our AI luxury travel concierge about destinations, activities, dining recommendations, or hidden gems to explore.
           </p>
         </div>
         
@@ -138,7 +139,7 @@ const ConciergeChat: React.FC = () => {
               <Input
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
-                placeholder="Ask about luxury destinations, accommodations, or experiences..."
+                placeholder="Ask about destinations, activities, dining, or places to explore..."
                 className="flex-grow"
                 disabled={isLoading}
               />
