@@ -27,11 +27,6 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
           src={imageUrl}
           alt={title}
           className="w-full h-full object-cover"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop"; // Fallback image
-            target.onerror = null; // Prevent infinite loop
-          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         <div className="absolute bottom-3 left-3 bg-luxury-gold/90 text-white text-xs font-medium px-2 py-1 rounded-full">

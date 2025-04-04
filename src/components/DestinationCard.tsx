@@ -26,11 +26,6 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
           src={imageUrl} 
           alt={name} 
           className="w-full h-full object-cover transition-transform hover:scale-105 duration-700"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=1970&auto=format&fit=crop"; // Fallback image
-            target.onerror = null; // Prevent infinite loop
-          }}
         />
         <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 flex items-center">
           <Star className="h-4 w-4 text-luxury-gold mr-1 fill-luxury-gold" />
