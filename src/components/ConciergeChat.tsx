@@ -23,6 +23,26 @@ const ConciergeChat: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   
+  const determineCategory = (message: string): 'destination' | 'activity' | 'dining' | 'exploration' | 'general' => {
+    const lowerMessage = message.toLowerCase();
+    
+    if (lowerMessage.includes('where to travel') || lowerMessage.includes('destination') || 
+        lowerMessage.includes('place to visit') || lowerMessage.includes('travel to')) {
+      return 'destination';
+    } else if (lowerMessage.includes('what to do') || lowerMessage.includes('activity') || 
+               lowerMessage.includes('experience') || lowerMessage.includes('things to do')) {
+      return 'activity';
+    } else if (lowerMessage.includes('what to eat') || lowerMessage.includes('restaurant') || 
+               lowerMessage.includes('dining') || lowerMessage.includes('food')) {
+      return 'dining';
+    } else if (lowerMessage.includes('where to explore') || lowerMessage.includes('hidden gem') || 
+               lowerMessage.includes('discover') || lowerMessage.includes('secret spot')) {
+      return 'exploration';
+    } else {
+      return 'general';
+    }
+  };
+  
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
     
@@ -41,12 +61,14 @@ const ConciergeChat: React.FC = () => {
     // Get AI response
     try {
       const response = await getChatResponse(inputMessage);
+      const category = determineCategory(inputMessage);
       
       const botMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         content: response,
         sender: 'bot',
-        timestamp: formatDistanceToNow(new Date(), { addSuffix: true })
+        timestamp: formatDistanceToNow(new Date(), { addSuffix: true }),
+        category
       };
       
       setMessages(prevMessages => [...prevMessages, botMessage]);
@@ -57,7 +79,8 @@ const ConciergeChat: React.FC = () => {
         id: (Date.now() + 1).toString(),
         content: "I'm sorry, I encountered an issue while processing your request. Please try again.",
         sender: 'bot',
-        timestamp: formatDistanceToNow(new Date(), { addSuffix: true })
+        timestamp: formatDistanceToNow(new Date(), { addSuffix: true }),
+        category: 'general'
       };
       
       setMessages(prevMessages => [...prevMessages, errorMessage]);
@@ -101,6 +124,7 @@ const ConciergeChat: React.FC = () => {
                 content={message.content}
                 sender={message.sender}
                 timestamp={message.timestamp}
+                category={message.category}
               />
             ))}
             <div ref={endOfMessagesRef} />
