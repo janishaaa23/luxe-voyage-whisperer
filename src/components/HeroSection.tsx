@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
       </div>
       
       {/* Content */}
-      <div className="relative z-1 h-full flex flex-col justify-center px-6 sm:px-10 md:px-16 max-w-7xl mx-auto">
+      <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-10 md:px-16 max-w-7xl mx-auto">
         <div className="max-w-xl animate-fade-in">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-white mb-4 leading-tight">
             Elevate Your <span className="text-luxury-gold">Travel Experience</span>
